@@ -739,6 +739,13 @@
 		56DB084B0D6717DC00453B6A /* NSNumber+CogSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+CogSort.m"; path = "Spotlight/NSNumber+CogSort.m"; sourceTree = "<group>"; };
 		56DB08530D67185300453B6A /* NSArray+CogSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+CogSort.h"; path = "Spotlight/NSArray+CogSort.h"; sourceTree = "<group>"; };
 		56DB08540D67185300453B6A /* NSArray+CogSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+CogSort.m"; path = "Spotlight/NSArray+CogSort.m"; sourceTree = "<group>"; };
+		5A227DC80FEF821800FFF7EE /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5A227DCB0FEF823800FFF7EE /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5A227DCF0FEF82DE00FFF7EE /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/InfoInspector.xib; sourceTree = "<group>"; };
+		5A227DD10FEF830A00FFF7EE /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/SpotlightPanel.xib; sourceTree = "<group>"; };
+		5A227DD20FEF831400FFF7EE /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/FileTree.xib; sourceTree = "<group>"; };
+		5A227DD30FEF831B00FFF7EE /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/OpenURLPanel.xib; sourceTree = "<group>"; };
+		5A227DD80FEF83C600FFF7EE /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/Feedback.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8E07AB760AAC930B00A4B32F /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PreferencesController.h; path = Preferences/PreferencesController.h; sourceTree = "<group>"; };
 		8E07AB770AAC930B00A4B32F /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PreferencesController.m; path = Preferences/PreferencesController.m; sourceTree = "<group>"; };
@@ -2062,6 +2069,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				17211A7D0D68B7C500911CA9 /* English */,
+				5A227DD20FEF831400FFF7EE /* zh_CN */,
 			);
 			name = FileTree.xib;
 			sourceTree = "<group>";
@@ -2070,6 +2078,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				17342A990D5FD20B00E8D854 /* English */,
+				5A227DC80FEF821800FFF7EE /* zh_CN */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -2078,6 +2087,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				17342ABE0D5FD36400E8D854 /* English */,
+				5A227DD30FEF831B00FFF7EE /* zh_CN */,
 			);
 			name = OpenURLPanel.xib;
 			sourceTree = "<group>";
@@ -2086,6 +2096,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				178456C10F6320B5007E8021 /* English */,
+				5A227DD10FEF830A00FFF7EE /* zh_CN */,
 			);
 			name = SpotlightPanel.xib;
 			sourceTree = "<group>";
@@ -2094,6 +2105,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				17D1B0D10F6320EA00694C57 /* English */,
+				5A227DCF0FEF82DE00FFF7EE /* zh_CN */,
 			);
 			name = InfoInspector.xib;
 			sourceTree = "<group>";
@@ -2102,6 +2114,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				17D1B1DB0F6330D400694C57 /* English */,
+				5A227DD80FEF83C600FFF7EE /* zh_CN */,
 			);
 			name = Feedback.xib;
 			sourceTree = "<group>";
@@ -2126,6 +2139,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8E7575DA09F31E930080F1EE /* English */,
+				5A227DCB0FEF823800FFF7EE /* zh_CN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
