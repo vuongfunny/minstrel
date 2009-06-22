@@ -1,0 +1,23 @@
+"FeedbackFailedMessageText" = "失败";
+"FeedbackFailedInformativeText" = "反馈信息发送失败.";
+"FeedbackSuccessMessageText" = "成功";
+"FeedbackSuccessInformativeText" = "反馈信息发送成功!";
+
+"PlayButtonTooltip" = "播放";
+"StopButtonTooltip" = "停止";
+"PrevButtonTooltip" = "上一首";
+"NextButtonTooltip" = "下一首";
+
+"TimeElapsed" = "%i:%02i";
+"TimeRemaining" = "-%i:%02i";
+
+"AddButtonTooltip" = "添加文件";
+"RemoveButtonTooltip" = "移除所选文件";
+"InfoButtonTooltip" = "显示选中文件信息";
+"ShuffleButtonTooltip" = "随机播放模式";
+"RepeatButtonTooltip" = "重复播放模式";
+"FileButtonTooltip" = "文件柜";
+
+"InvalidURLShort" = "无效的 URL";
+"InvalidURLLong" = "URL 地址不可用.";
+
