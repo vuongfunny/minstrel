@@ -80,8 +80,9 @@ char *fgets_private(char *buf, int size, FILE *fp)
 	return buf;
 }
 
-NSStringEncoding detectEncoding(FILE *fp)
+NSStringEncoding detectEncoding(NSString *filename)
 {
+	FILE *fp = fopen([filename UTF8String], "rb");
 	char buf[2048];
 	char tmp[2048];
 	char *ptr = buf;
@@ -143,6 +144,7 @@ NSStringEncoding detectEncoding(FILE *fp)
 	if(eucStr) CFRelease(eucStr);
 	if(utf8Str) CFRelease(utf8Str);
 	fseeko(fp,pos,SEEK_SET);
+	fclose(fp);
 	
 	if(minLength == INT_MAX) return [NSString defaultCStringEncoding];
 	if(minLength == asciiLength) return [NSString defaultCStringEncoding];
@@ -162,8 +164,7 @@ NSStringEncoding detectEncoding(FILE *fp)
 	/* Original:
 	NSStringEncoding encoding;
 	 */
-	FILE *fp = fopen([filename UTF8String],"rb");
-	NSStringEncoding encoding = detectEncoding(fp);
+	NSStringEncoding encoding = detectEncoding(filename);
 	//-------Modified END----------------
 	NSError *error = nil;
 	NSString *contents = [NSString stringWithContentsOfFile:filename usedEncoding:&encoding error:&error];
