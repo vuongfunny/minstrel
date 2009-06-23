@@ -61,10 +61,110 @@
 
 
 
+//-----------Added by K.O.ed 2009.06.23-------------
+// Enabling encoding detection, codes come from XLD by tmkk
+char *fgets_private(char *buf, int size, FILE *fp)
+{
+	int i;
+	char c;
+	
+	for(i=0;i<size-1;) {
+		if(fread(&c,1,1,fp) != 1) break;
+		buf[i++] = c;
+		if(c == '\n' || c == '\r') {
+			break;
+		}
+	}
+	if(i==0) return NULL;
+	buf[i] = 0;
+	return buf;
+}
+
+NSStringEncoding detectEncoding(FILE *fp)
+{
+	char buf[2048];
+	char tmp[2048];
+	char *ptr = buf;
+	int len = 0;
+	int minLength = INT_MAX;
+	off_t pos = ftello(fp);
+	CFStringRef asciiStr;
+	CFStringRef sjisStr;
+	CFStringRef cp932Str;
+	CFStringRef jisStr;
+	CFStringRef eucStr;
+	CFStringRef utf8Str;
+	int asciiLength;
+	int sjisLength;
+	int cp932Length;
+	int jisLength;
+	int eucLength;
+	int utf8Length;
+	
+	
+	while(fgets_private(tmp,2048,fp) != NULL) {
+		int ret = strlen(tmp);
+		len += ret;
+		if(len > 2048) {
+			len -= ret;
+			break;
+		}
+		memcpy(ptr,tmp,ret);
+		ptr += ret;
+	}
+	
+	asciiStr = CFStringCreateWithBytes(NULL, (const UInt8 *)buf, len,  kCFStringEncodingASCII,false);
+	sjisStr = CFStringCreateWithBytes(NULL, (const UInt8 *)buf, len, kCFStringEncodingShiftJIS,false);
+	cp932Str = CFStringCreateWithBytes(NULL, (const UInt8 *)buf, len, kCFStringEncodingDOSJapanese,false);
+	jisStr = CFStringCreateWithBytes(NULL, (const UInt8 *)buf, len, kCFStringEncodingISO_2022_JP,false);
+	eucStr = CFStringCreateWithBytes(NULL, (const UInt8 *)buf, len, kCFStringEncodingEUC_JP,false);
+	utf8Str = CFStringCreateWithBytes(NULL, (const UInt8 *)buf, len, kCFStringEncodingUTF8,false);
+	
+	asciiLength = (asciiStr) ? CFStringGetLength(asciiStr) : INT_MAX;
+	sjisLength = (sjisStr) ? CFStringGetLength(sjisStr) : INT_MAX;
+	cp932Length = (cp932Str) ? CFStringGetLength(cp932Str) : INT_MAX;
+	jisLength = (jisStr) ? CFStringGetLength(jisStr) : INT_MAX;
+	eucLength = (eucStr) ? CFStringGetLength(eucStr) : INT_MAX;
+	utf8Length = (utf8Str) ? CFStringGetLength(utf8Str) : INT_MAX;
+	
+	if(asciiLength < minLength) minLength = asciiLength;
+	if(sjisLength < minLength) minLength = sjisLength;
+	if(cp932Length < minLength) minLength = cp932Length;
+	if(jisLength < minLength) minLength = jisLength;
+	if(eucLength < minLength) minLength = eucLength;
+	if(utf8Length < minLength) minLength = utf8Length;
+	
+	//NSLog(@"%d,%d,%d,%d,%d,%d\n",asciiLength,sjisLength,cp932Length,jisLength,eucLength,utf8Length);
+	
+	if(asciiStr) CFRelease(asciiStr);
+	if(sjisStr) CFRelease(sjisStr);
+	if(cp932Str) CFRelease(cp932Str);
+	if(jisStr) CFRelease(jisStr);
+	if(eucStr) CFRelease(eucStr);
+	if(utf8Str) CFRelease(utf8Str);
+	fseeko(fp,pos,SEEK_SET);
+	
+	if(minLength == INT_MAX) return [NSString defaultCStringEncoding];
+	if(minLength == asciiLength) return [NSString defaultCStringEncoding];
+	if(minLength == sjisLength) return CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingShiftJIS);
+	if(minLength == cp932Length) return CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingDOSJapanese);
+	if(minLength == utf8Length) return CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8);
+	if(minLength == eucLength) return CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingEUC_JP);
+	if(minLength == jisLength) return CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingISO_2022_JP);
+	
+	return [NSString defaultCStringEncoding];
+}
+//-----------Added END-------------
 
 - (void)parseFile:(NSString *)filename
 {
+	//-------Modified by K.O.ed @ 2009.06.23---------
+	/* Original:
 	NSStringEncoding encoding;
+	 */
+	FILE *fp = fopen([filename UTF8String],"rb");
+	NSStringEncoding encoding = detectEncoding(fp);
+	//-------Modified END----------------
 	NSError *error = nil;
 	NSString *contents = [NSString stringWithContentsOfFile:filename usedEncoding:&encoding error:&error];
     if (error) {
